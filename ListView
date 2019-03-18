@@ -1,0 +1,12 @@
+Programmatically scrolling to the end of a ListView
+ 
+ ScrollController _scrollController;
+ 
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _scrollController = ScrollController();
+  }
+ 
+ _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
