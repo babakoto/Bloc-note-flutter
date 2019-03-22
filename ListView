@@ -10,3 +10,14 @@ Programmatically scrolling to the end of a ListView
   }
  
  _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+
+
+
+------------------------------------------------------------------------------
+Vertical viewport was given unbounded height
+
+Solution: 
+
+ListView.builder(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
