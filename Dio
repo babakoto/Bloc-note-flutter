@@ -1,1 +1,12 @@
 
+// Send Image to server
+Dio dio = new Dio(); 
+ FormData formData = new FormData.from({
+      "file": UploadFileInfo(File(_image.path), "test"),
+      "ext":"jpg", // extension
+      "dest": "upload/cv" // destination
+    });
+    response = await dio.post(
+      "http://51.75.24.163:5000/api/upload",
+      data: formData
+    );
