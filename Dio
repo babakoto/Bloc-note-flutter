@@ -1,3 +1,5 @@
+ Dio dio = new Dio();
+ File _image ;
 Future _getImage() async {
     Response response;
     Dio dio = new Dio();
