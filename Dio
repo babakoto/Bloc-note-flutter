@@ -1,3 +1,32 @@
+Future _getImage() async {
+    Response response;
+    Dio dio = new Dio();
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+    FormData formData = new FormData.from({
+      "file": UploadFileInfo(File(_image.path), "test"),
+      "ext":"jpg",
+      "dest": "upload/cv"
+    });
+    response = await dio.post(
+      "http://51.75.24.163:5000/api/upload",
+      data: formData
+    );
+
+    print(response.data["body"]);
+  }
+
+
+
+
+
+
+
+
+
+
 
 // Send Image to server
 Dio dio = new Dio(); 
