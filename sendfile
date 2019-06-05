@@ -1,0 +1,52 @@
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class Profile extends StatefulWidget {
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  Dio dio = new Dio();
+
+
+
+
+  File _image ;
+  Future _getImage() async {
+    Response response;
+    Dio dio = new Dio();
+
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+    FormData formData = new FormData.from({
+      "file": UploadFileInfo(File(_image.path), "test"),
+      "ext":"jpg",
+      "dest": "upload/cv"
+    });
+    response = await dio.post(
+      "http://51.75.24.163:5000/api/upload",
+      data: formData
+    );
+
+    print(response.data["body"]);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FlatButton(
+        child: Icon(
+          Icons.camera_alt,
+          color: Colors.redAccent,
+        ),
+        onPressed: this._getImage,
+        color: Colors.white,
+      ),
+      margin: EdgeInsets.only(top: 20.0),
+    );
+  }
+}
